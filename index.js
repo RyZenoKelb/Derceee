@@ -268,15 +268,19 @@ Client.on('message', msg => {
        type: 'text',
        permissionOverwrites: [
          {
-           id: msg.guild.id,
-           deny: ['VIEW_CHANNEL'],
-         },
-         {
-           id: msg.author.id,
-           allow: ['VIEW_CHANNEL'],
-           allow: ['SEND_MESSAGES']
-         },
-       ],
+          allow: 'VIEW_CHANNEL',
+          allow: 'SEND_MESSAGES',
+          id: msg.author.id
+      },
+      {
+          deny: 'VIEW_CHANNEL',
+          id: msg.guild.id
+      },
+      {
+        allow: 'VIEW_CHANNEL',
+        id: msg.author.id
+    }
+       ]
      }).then(ch => { msg.reply('**Vous avez créé un ticket, le support vous contactera via le canal créé.**'); });
      console.log('TICKET CREATED');
      msg.delete();
